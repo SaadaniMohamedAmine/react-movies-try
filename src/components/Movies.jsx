@@ -3,16 +3,25 @@ import { useQuery } from "@tanstack/react-query";
 import { getMovies } from "../actions/api";
 import Spinner from "./Spinner.jsx";
 import MovieCard from "./MovieCard";
+import { useEffect } from "react";
 
 const Movies = ({ searchTerm }) => {
   const {
     data: movies,
     isLoading,
     isError,
+    refetch,
   } = useQuery({
     queryKey: ["movies", searchTerm],
-    queryFn: ()=>getMovies(searchTerm),
+    queryFn: () => getMovies(searchTerm),
+    enabled: true,
   });
+
+  useEffect(() => {
+    if (searchTerm === "") {
+      refetch();
+    }
+  }, [searchTerm, refetch]);
   return (
     <div className="my-10 px-50">
       <h1 className="text-4xl text-left mb-10">All Movies</h1>

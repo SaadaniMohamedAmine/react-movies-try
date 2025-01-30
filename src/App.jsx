@@ -4,6 +4,7 @@ import {useDebounce} from "react-use"
 import Header from "./components/Header";
 import Movies from "./components/Movies";
 import Search from "./components/Search";
+import TrendingMovies from "./components/TrendingMovies.jsx";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ const App = () => {
         <Header />
         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <Movies searchTerm={debouncedSearch}/>
+        <TrendingMovies />
       </div>
     </QueryClientProvider>
   );

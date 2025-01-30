@@ -4,19 +4,18 @@ import { getMovies } from "../actions/api";
 import Spinner from "./Spinner.jsx";
 import MovieCard from "./MovieCard";
 
-const Movies = () => {
+const Movies = ({ searchTerm }) => {
   const {
     data: movies,
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["movies"],
-    queryFn: getMovies,
+    queryKey: ["movies", searchTerm],
+    queryFn: ()=>getMovies(searchTerm),
   });
   return (
     <div className="my-10 px-50">
       <h1 className="text-4xl text-left mb-10">All Movies</h1>
-      {isLoading && <Spinner />}
       {isLoading && <Spinner />}
       {isError && <p className="text-red-500">Failed to fetch movies.</p>}
       <div className="grid grid-cols-5 grid-rows-3 gap-4 px-30">

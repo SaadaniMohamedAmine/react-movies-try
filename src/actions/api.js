@@ -4,10 +4,9 @@ const discover_url = "/discover/movie?sort_by=popularity.desc&api_key=";
 const moviesApiKey = import.meta.env.VITE_TMDB_API_KEY;
 
 export const getMovies = async (searchTerm) => {
-  console.log(searchTerm)
+  console.log(searchTerm);
   try {
-    const endpoint = `${base_url}${discover_url}${moviesApiKey}`;
-    const response = await fetch(endpoint);
+    const response = await fetch(`${base_url}${discover_url}${moviesApiKey}`);
     const data = await response.json();
     return data.results;
   } catch (error) {
